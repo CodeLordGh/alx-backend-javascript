@@ -1,4 +1,4 @@
-export default function getListStudents() {
+const getListStudents = () => {
   const listStudents = [
     {
       firstName: "Guillaume",
@@ -18,4 +18,6 @@ export default function getListStudents() {
   ];
 
   return listStudents;
-}
+};
+
+export default getListStudents;
