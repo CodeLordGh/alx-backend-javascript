@@ -12,4 +12,4 @@ const displayMessage = (message) => console.log(message);
  * @function
  */
 // Default module export.
-module.exports = displayMessage;
+export default displayMessage;
