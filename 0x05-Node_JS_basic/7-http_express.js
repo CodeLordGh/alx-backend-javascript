@@ -1,17 +1,16 @@
-const express = require('express');
-const fs = require('fs');
+import express from 'express';
+import { readFile } from 'fs';
 
 const app = express();
 const PORT = 1245;
 const DB_FILE = process.argv.length > 2 ? process.argv[2] : '';
-
 
 const countStudents = (dataPath) => new Promise((resolve, reject) => {
   if (!dataPath) {
     reject(new Error('Cannot load the database'));
   }
   if (dataPath) {
-    fs.readFile(dataPath, (err, data) => {
+    readFile(dataPath, (err, data) => {
       if (err) {
         reject(new Error('Cannot load the database'));
       }
@@ -89,4 +88,4 @@ app.listen(PORT, () => {
   console.log(`Server listening on PORT ${PORT}`);
 });
 
-module.exports = app;
+export default app;
