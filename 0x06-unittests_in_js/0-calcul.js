@@ -1,10 +1,3 @@
-function calculateNumber(a, b) {
-    // Round a and b
-    a = Math.round(a);
-    b = Math.round(b);
-  
-    // Return sum
-    return a + b;
-  }
-  
+const calculateNumber = (a, b) => Math.round(a) + Math.round(b);
+
 export default calculateNumber;
