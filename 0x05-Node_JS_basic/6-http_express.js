@@ -1,14 +1,18 @@
+/**
+ * Simple express server
+ */
 const express = require('express');
 
+const host = '127.0.0.1';
+const port = 1245;
 const app = express();
-const PORT = 1245;
 
-app.get('/', (_, res) => {
+app.get('/', (req, res) => {
   res.send('Hello Holberton School!');
 });
 
-app.listen(PORT, () => {
-  console.log(`Server listening on PORT ${PORT}`);
+app.listen(port, host, () => {
+  console.log(`Server is live, running at http://${host}:${port}`);
 });
 
 module.exports = app;

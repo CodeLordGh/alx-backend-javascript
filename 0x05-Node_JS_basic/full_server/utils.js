@@ -1,44 +1,30 @@
-import fs from 'fs';
+import { readFile } from 'fs';
 
 /**
- * Reads the data of students in a CSV data file.
+ * Asynchronously reads csv database containing students info, parses
+ * info in the db and return promise.
+ * @param   {string}  db - database.
+ * @returns {promise}    - resolves with object with list of students.
+ *                       - rejects when error is encountered in file read.
  */
-const readDatabase = (dataPath) => new Promise((resolve, reject) => {
-  if (!dataPath) {
-    reject(new Error('Cannot load the database'));
-  }
-  if (dataPath) {
-    fs.readFile(dataPath, (err, data) => {
-      if (err) {
+export default function readDatabase(db) {
+  return new Promise((resolve, reject) => {
+    readFile(db, 'utf-8', (error, data) => {
+      if (error) {
         reject(new Error('Cannot load the database'));
-      }
-      if (data) {
-        const fileLines = data
-          .toString('utf-8')
-          .trim()
-          .split('\n');
-        const studentGroups = {};
-        const dbFieldNames = fileLines[0].split(',');
-        const studentPropNames = dbFieldNames
-          .slice(0, dbFieldNames.length - 1);
-
-        for (const line of fileLines.slice(1)) {
-          const studentRecord = line.split(',');
-          const studentPropValues = studentRecord
-            .slice(0, studentRecord.length - 1);
-          const field = studentRecord[studentRecord.length - 1];
-          if (!Object.keys(studentGroups).includes(field)) {
-            studentGroups[field] = [];
-          }
-          const studentEntries = studentPropNames
-            .map((propName, idx) => [propName, studentPropValues[idx]]);
-          studentGroups[field].push(Object.fromEntries(studentEntries));
-        }
-        resolve(studentGroups);
+      } else {
+        const courseInfo = {};
+        let students = data.split('\n');
+        students = students.slice(1, students.length - 1);
+        students.forEach((student) => {
+          const studentData = student.split(',');
+          const field = studentData[3];
+          const firstName = studentData[0];
+          if (field in courseInfo) courseInfo[field].push(firstName);
+          else courseInfo[field] = [firstName];
+        });
+        resolve(courseInfo);
       }
     });
-  }
-});
-
-export default readDatabase;
-module.exports = readDatabase;
+  });
+}
