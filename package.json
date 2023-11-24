@@ -1,5 +1,8 @@
 {
   "dependencies": {
     "sinon": "^17.0.1"
+  },
+  "devDependencies": {
+    "mocha": "^10.2.0"
   }
 }

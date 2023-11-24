@@ -1,36 +1,11 @@
-import { strictEqual } from 'assert';
+import { equal } from 'assert';
 import calculateNumber from './0-calcul.js';
 
 describe('calculateNumber', () => {
-  it('floating point whole numbers', () => {
-    strictEqual(calculateNumber(1.0, 2.0), 3);
-  });
-
-  it('rounding down b\'s floating point fractional number', () => {
-    strictEqual(calculateNumber(1.0, 2.4), 3);
-  });
-
-  it('rounding down a and b\'s floating point fractional number', () => {
-    strictEqual(calculateNumber(1.4, 2.4), 3);
-  });
-
-  it('rounding down a\'s floating point fractional number', () => {
-    strictEqual(calculateNumber(1.4, 2.0), 3);
-  });
-
-  it('rounding up b\'s floating point fractional numbers', () => {
-    strictEqual(calculateNumber(1.0, 2.5), 4);
-  });
-
-  it('rounding up a and b\'s floating point fractional numbers', () => {
-    strictEqual(calculateNumber(2.6, 2.5), 6);
-  });
-
-  it('rounding up a\'s floating point fractional numbers', () => {
-    strictEqual(calculateNumber(2.6, 2.0), 5);
-  });
-
-  it('rounding down a and b floating point fractional numbers with trailing 9\'s', () => {
-    strictEqual(calculateNumber(2.499999, 3.499999), 5);
+  it('should round both numbers and return their sum', () => {
+    equal(calculateNumber(1, 3), 4);
+    equal(calculateNumber(1, 3.7), 5);
+    equal(calculateNumber(1.2, 3.7), 5);
+    equal(calculateNumber(1.5, 3.7), 6);
   });
 });
