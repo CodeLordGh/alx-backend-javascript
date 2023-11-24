@@ -1,5 +1,6 @@
 import assert from 'assert';
-import calculateNumber from './1-calcul';
+// eslint-disable-next-line import/extensions
+import calculateNumber from './1-calcul.js';
 
 describe('calculateNumber', () => {
   describe('type == "SUM"', () => {
